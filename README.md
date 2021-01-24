@@ -1,3 +1,5 @@
+This fork prevents onset 'NG' and does not push 'R' and 'Y' into the nucleus.
+
 === Port for Python3
 
 syllabify.py is a Python module for syllabifying ARPABET transcriptions; 
