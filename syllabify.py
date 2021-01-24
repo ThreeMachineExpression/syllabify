@@ -43,7 +43,7 @@ O2 = {('P', 'R'), ('T', 'R'), ('K', 'R'), ('B', 'R'), ('D', 'R'),
       ('K', 'W'), ('G', 'W'), ('S', 'W'),
       ('S', 'P'), ('S', 'T'), ('S', 'K'),
       ('HH', 'Y'), # "clerihew"
-      ('R', 'W'),}
+      ('R', 'W')}
 O3 = {('S', 'T', 'R'), ('S', 'K', 'L'), ('T', 'R', 'W')} # "octroi"
 
 # This does not represent anything like a complete list of onsets, but
@@ -82,24 +82,6 @@ def syllabify(pron, alaska_rule=True):
     'JH-UW1-N.Y-ER0-'
     >>> pprint(syllabify('K L EH R IH HH Y UW'.split())) # clerihew
     'K L-EH-.R-IH-.HH Y-UW-'
-
-    # nuclear treatment of 'j'
-    >>> pprint(syllabify('R EH1 S K Y UW0'.split())) # rescue
-    'R-EH1-S.K-Y UW0-'
-    >>> pprint(syllabify('T R IH1 B Y UW0 T'.split())) # tribute
-    'T R-IH1-B.Y-UW0-T'
-    >>> pprint(syllabify('N EH1 B Y AH0 L AH0'.split())) # nebula
-    'N-EH1-B.Y-AH0-.L-AH0-'
-    >>> pprint(syllabify('S P AE1 CH UH0 L AH0'.split())) # spatula
-    'S P-AE1-.CH-UH0-.L-AH0-'
-    >>> pprint(syllabify('AH0 K Y UW1 M AH0 N'.split())) # acumen
-    '-AH0-K.Y-UW1-.M-AH0-N'
-    >>> pprint(syllabify('S AH1 K Y AH0 L IH0 N T'.split())) # succulent
-    'S-AH1-K.Y-AH0-.L-IH0-N T'
-    >>> pprint(syllabify('F AO1 R M Y AH0 L AH0'.split())) # formula
-    'F-AO1 R-M.Y-AH0-.L-AH0-'
-    >>> pprint(syllabify('V AE1 L Y UW0'.split())) # value
-    'V-AE1-L.Y-UW0-'
 
     # everything else
     >>> pprint(syllabify('N AO0 S T AE1 L JH IH0 K'.split())) # nostalgic
@@ -152,10 +134,8 @@ def syllabify(pron, alaska_rule=True):
     for i in range(1, len(onsets)):
         coda = []
         # boundary cases
-        if len(onsets[i]) > 1 and onsets[i][0] == 'R':
-            nuclei[i - 1].append(onsets[i].pop(0))
-        if len(onsets[i]) > 2 and onsets[i][-1] == 'Y':
-            nuclei[i].insert(0, onsets[i].pop())
+        if len(onsets[i]) > 0 and onsets[i][0] == 'NG':
+            coda.append(onsets[i].pop(0))
         if len(onsets[i]) > 1 and alaska_rule and nuclei[i-1][-1] in SLAX \
                                               and onsets[i][0] == 'S':
             coda.append(onsets[i].pop(0))
