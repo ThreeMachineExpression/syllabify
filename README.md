@@ -1,4 +1,4 @@
-This fork prevents onset 'NG' and does not push 'R' and 'Y' into the nucleus.
+This fork prevents onset 'NG' and does not push 'R' and 'Y' into the nucleus in order to facilitate better assonance testing.
 
 === Port for Python3
 
